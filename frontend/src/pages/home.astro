@@ -4,14 +4,16 @@ import UserHome from "../components/UserHome.astro";
 import Boton from "../components/Boton.astro";
 import IconsInferior from "../components/IconsInferior.astro"
 import Header from "../components/Header.astro";
+import BonEstat from "../components/BonEstat.astro";
 import '../styles/home.css';
 ---
 
 <MainLayout pageTitle="Dracula - Home">
     <Header title="Home"/>
-    <div class="relative overflow-hidden w-2/4 max-w-md shadow-xl flex items-center justify-center mx-auto mt-10 rounded-xl ring ring-electric-violet-200">
-        <img src="https://cdn.icon-icons.com/icons2/2914/PNG/512/line_chart_dots_icon_183424.png" alt="Descripción de la imagen" class="w-full h-auto">
+    <div class="relative overflow-hidden w-3/4 max-w-md shadow-xl flex items-center justify-center mx-auto mt-10 rounded-xl ring ring-electric-violet-200">
+        <img src="https://cdn.icon-icons.com/icons2/2914/PNG/512/line_chart_dots_icon_183424.png" alt="Descripción de la imagen" class="w-3/4 h-auto">
     </div>
+    <BonEstat/>
     <IconsInferior/>
 </MainLayout>
   
