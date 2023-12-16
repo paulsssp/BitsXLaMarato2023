@@ -1,0 +1,38 @@
+---
+import Footer from "../components/Footer.astro";
+import './styles/login.css';
+---
+
+<html lang="ca">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} >
+    <title>Dracula Login</title>
+  </head>
+  <body>
+    <h1>Registra't</h1>
+    <h2>Registre</h2>
+
+    <label for="username">Usuari:</label>
+    <input type="text" id="username" name="username">
+    <br>
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email">
+    <br>
+    <label for="password">Contrasenya:</label>
+    <input type="password" id="password" name="password">
+    <br>
+    <label for="password2">Confirmar contrasenya:</label>
+    <input type="password" id="password2" name="password2">
+
+    {/* 
+    {return_status == "ERROR"} && <script>
+      alert("hola");
+      </script>
+    */}
+
+    <Footer/>
+  </body>
+</html>
