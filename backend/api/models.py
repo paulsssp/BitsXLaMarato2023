@@ -1,9 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+class UserModel(models.Model):
+    username = models.CharField(max_length=50)
+    password = models.CharField(max_length=50)
+    logged_in = models.BooleanField(default=False)
+
 # Create your models here.
 class CicleMenstrual(models.Model):
-    usuari = models.ForeignKey(User, on_delete=models.CASCADE)
+    usuari = models.ForeignKey(UserModel, on_delete=models.CASCADE)
     data_camp = models.DateField(auto_now_add=True)
 
     def __str__(self):
@@ -36,12 +41,8 @@ class EncuestaQOL(models.Model):
     manchar_asiento = models.BooleanField()
     evitar_activitats = models.BooleanField()
 
-    usuari = models.ForeignKey(User, on_delete=models.CASCADE)
+    usuari = models.ForeignKey(UserModel, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.usuari
+        return self.usuari.username
     
-class UserModel(models.Model):
-    username = models.CharField(max_length=50)
-    password = models.CharField(max_length=50)
-    logged_in = models.BooleanField(default=False)
