@@ -126,8 +126,9 @@ def upload_encuesta_qol(request):
 def login(request):
     if (request.method == 'POST'):
         # Check if the user and password are correct
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+        data = json.loads(request.body.decode('utf-8'))
+        username = data.get('username')
+        password = data.get('password')
 
         # Check if the user exists
         if (UserModel.objects.filter(username=username).exists()):
