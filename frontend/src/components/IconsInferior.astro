@@ -2,24 +2,29 @@
 ---
 <div class="absolute bottom-0 left-0 z-50 w-full h-16 bg-white border-t border-gray-200">
     <div class="grid h-full max-w-lg grid-cols-3 mx-auto">
-        <button type="button" class="inline-flex flex-col items-center justify-center font-medium px-5 hover:bg-gray-50 group">
-            <svg class="w-6 h-6 mb-1 text-gray-500  group-hover:text-electric-violet-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z" />
-            </svg>
-              
-            <span class="text-sm text-gray-500  group-hover:text-electric-violet-600">Seguiment</span>
-        </button>
-        <button type="button" class="inline-flex flex-col items-center justify-center font-medium px-5 hover:bg-gray-50 group">
-            <svg class="w-6 h-6 mb-1 text-gray-500  group-hover:text-electric-violet-600 group" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-            </svg>
-            <span class="text-sm text-gray-500  group-hover:text-electric-violet-600">Home</span>
-        </button>
-        <button type="button" class="inline-flex flex-col items-center justify-center font-medium px-5 hover:bg-gray-50 group">
-            <svg class="w-6 h-6 mb-1 text-gray-500  group-hover:text-electric-violet-600 group" mb-1 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
-                <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-            </svg>
-            <span class="text-sm text-gray-500 group-hover:text-electric-violet-600 group">Qüestionaris</span>
-        </button>
+        <a href="/seguiment/" class="inline-flex flex-col items-center justify-center font-medium px-5">
+            <button type="button" class="inline-flex flex-col items-center justify-center font-medium px-5 group">
+                <svg class="w-6 h-6 mb-1 text-gray-500  group-hover:text-electric-violet-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z" />
+                </svg>
+                <span class="text-sm text-gray-500  group-hover:text-electric-violet-600">Seguiment</span>
+            </button>
+        </a>
+        <a href="/home/" class="inline-flex flex-col items-center justify-center font-medium px-5">
+            <button type="button" class="inline-flex flex-col items-center justify-center font-medium px-5 group">
+                <svg class="w-6 h-6 mb-1 text-gray-500  group-hover:text-electric-violet-600 group" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                </svg>
+                <span class="text-sm text-gray-500  group-hover:text-electric-violet-600">Home</span>
+            </button>
+        </a>
+        <a href="/questionaris/" class="inline-flex flex-col items-center justify-center font-medium px-5">
+            <button type="button" class="inline-flex flex-col items-center justify-center font-medium px-5  group">
+                <svg class="w-6 h-6 mb-1 text-gray-500  group-hover:text-electric-violet-600 group" mb-1 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                </svg>
+                <span class="text-sm text-gray-500 group-hover:text-electric-violet-600 group">Qüestionaris</span>
+            </button>
+        </a>
     </div>
 </div>
