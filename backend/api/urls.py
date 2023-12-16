@@ -9,5 +9,7 @@ urlpatterns = [
     path('get_encuesta_qol/<str:user>/', views.get_encuesta_qol, name='get_encuesta_qol'),
     path('login/', views.login, name='login'),
     path('register/', views.register, name='register'),
-    path('logout/', views.logout, name='logout')
+    path('logout/', views.logout, name='logout'),
+    path('test/', views.test, name='test'),
+    path('grafic_pbac/<str:user>', views.grafic_pbac, name='grafic_pbac')
 ]

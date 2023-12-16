@@ -31,7 +31,7 @@ class DiaMenstrual(models.Model):
     tampo_coaguls = models.IntegerField()
 
     def __str__(self):
-        return self.cicle.usuari + " - " + self.cicle.data_camp + " - " + self.dia
+        return self.cicle.usuari + " - " + self.cicle.data_camp.day + "/" + self.cicle.data_camp.month +  "/" + self.cicle.data_camp.year + " - " + self.dia
 
 class EncuestaQOL(models.Model):
     mes_7_dies = models.BooleanField()
