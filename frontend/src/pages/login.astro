@@ -2,6 +2,7 @@
 import Footer from "../components/Footer.astro";
 import './styles/login.css';
 ---
+  
 
 <html lang="ca">
   <head>
@@ -13,9 +14,8 @@ import './styles/login.css';
   </head>
   <body>
     <h1>Inicia sessió</h1>
-    <h2>Inici de sessió</h2>
+    <h2>Introdueix el teu nom d'usuari i contrasenya</h2>
 
-    <p>Introdueix el teu nom d'usuari i contrasenya</p>
     <form id="loginForm" action="http://127.0.0.1:8000/api/login/" method="post">
         <label for="username">Usuari:</label>
         <input type="text" id="username" name="username">
@@ -23,13 +23,14 @@ import './styles/login.css';
         <label for="password">Contrasenya:</label>
         <input type="password" id="password" name="password">
         <br>
-        <button type="button" id="miBoton">Finalitzar</button>
+        <button type="button" id="miBoton" class="px-20 mt-5 mb-5 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-800 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Finalitzar</button>
     </form>
 
     <script type="module">
       const miBoton = document.getElementById('miBoton');
 
       function handleClick() {
+        alert('Botón pulsado');
     console.log(JSON.stringify({
         username: document.getElementById('username').value,
         password: document.getElementById('password').value
@@ -64,11 +65,10 @@ import './styles/login.css';
 }
 
 
-
       miBoton.addEventListener('click', handleClick);
     </script>
 
-    <p>Si no tens compte <a href="/signup">registra't</a></p>
+    <p>Si no tens compte <a href="/signup"><u>registra't</u></a></p>
 
     <Footer/>
   </body>

@@ -1,0 +1,58 @@
+---
+import Footer from "../components/Footer.astro";
+import './styles/login.css';
+---
+
+<html lang="ca">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} >
+    <title>Recuperació contrasenya</title>
+  </head>
+  <body>
+    <h1>Recuperar contrasenya</h1>
+
+    <label for="username">Usuari:</label>
+    <input type="text" id="username" name="username">
+    <br>
+    <label for="password">Nova contrasenya:</label>
+    <input type="password" id="password" name="password">
+    <br>
+    <label for="password2">Confirmar contrasenya:</label>
+    <input type="password" id="password2" name="password2">
+    <br>
+
+    <button type="submit" id="miBoton"><b>Canviar contraseny</b></button>
+ 
+
+    <script type="module">
+      const miBoton = document.getElementById('miBoton');
+
+      function handleClick() {
+        alert('clicat');
+        fetch('/api/login', {
+          method: 'POST',
+          body: JSON.stringify({
+            username: document.getElementById('username').value,
+            email: document.getElementById('email').value,
+            password: document.getElementById('password').value,
+            password2: document.getElementById('password2').value
+          })
+        })
+      }
+
+      miBoton.addEventListener('click', handleClick);
+    </script>
+
+
+    {/* 
+    {return_status == "ERROR"} && <script>
+      alert("hola");
+      </script>
+    */}
+
+    <Footer/>
+  </body>
+</html>

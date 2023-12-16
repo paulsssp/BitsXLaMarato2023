@@ -13,26 +13,71 @@ import './styles/login.css';
   </head>
   <body>
     <h1>Registra't</h1>
-    <h2>Registre</h2>
 
-    <label for="username">Usuari:</label>
-    <input type="text" id="username" name="username">
-    <br>
-    <label for="email">Email:</label>
-    <input type="text" id="email" name="email">
-    <br>
-    <label for="password">Contrasenya:</label>
-    <input type="password" id="password" name="password">
-    <br>
-    <label for="password2">Confirmar contrasenya:</label>
-    <input type="password" id="password2" name="password2">
+    <form id="loginForm" action="http://127.0.0.1:8000/api/signup/" method="post">
+      <label for="username">Usuari:</label>
+      <input type="text" id="username" name="username">
+      <br>
+      <label for="email">Email:</label>
+      <input type="text" id="email" name="email">
+      <br>
+      <label for="password">Contrasenya:</label>
+      <input type="password" id="password" name="password">
+      <br>
+      <label for="password2">Confirmar contrasenya:</label>
+      <input type="password" id="password2" name="password2">
 
-    {/* 
-    {return_status == "ERROR"} && <script>
-      alert("hola");
-      </script>
-    */}
+      {/* 
+      {return_status == "ERROR"} && <script>
+        alert("hola");
+        </script>
+      */}
+      <br>
+      <button type="button" id="miBoton" class="px-16 mt-5 mb-5 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-800 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Dona't d'alta</button>
+      <p>Si ja estaves registrat <a href="/login"> <u>inicia sessió</u></a></p>
+    </form>
+    <script type="module">
+      const miBoton = document.getElementById('miBoton');
 
+      function handleClick() {
+        alert('Botón pulsado');
+      console.log(JSON.stringify({
+          username: document.getElementById('username').value,
+          password: document.getElementById('password').value
+      }));
+
+    fetch('http://127.0.0.1:8000/api/login/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            username: document.getElementById('username').value,
+            email: document.getElementById('email').value,
+            password: document.getElementById('password').value,
+            password2: document.getElementById('password2').value
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+
+        // Check if the response is OK (200)
+        if (data.status == "OK") {
+            // TODO: Store the token in the local storage
+        } else {
+            alert('Error al iniciar sessió');
+        }
+    })
+    .catch(error => {
+        // Handle any errors that occurred during the fetch
+        console.error('Error during fetch:', error);
+        alert('Error al comunicar-se amb el servidor');
+    });
+  }
+
+      miBoton.addEventListener('click', handleClick);
+    </script>
     <Footer/>
   </body>
 </html>
