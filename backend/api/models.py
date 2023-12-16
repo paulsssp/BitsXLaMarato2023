@@ -40,3 +40,8 @@ class EncuestaQOL(models.Model):
 
     def __str__(self):
         return self.usuari
+    
+class UserModel(models.Model):
+    username = models.CharField(max_length=50)
+    password = models.CharField(max_length=50)
+    logged_in = models.BooleanField(default=False)
