@@ -25,20 +25,27 @@ def logout(request):
 
 # Create your views here.
 @csrf_exempt
-def get_encuesta_pbac(request, user_id):
+def get_encuesta_pbac(request, user):
     if (request.method == 'GET'):
         # Comprobar que el usuario está logged_in
-        if (UserModel.objects.filter(id=user_id, logged_in=True).exists()):
+        if (UserModel.objects.filter(username=user, logged_in=True).exists()):
             data = {'name': 'Get Encuesta PBAC'}
             return JsonResponse(data)
+        
+        else:
+            print("no")
+            return JsonResponse({'error': 'User not logged in'}, status=401)
 
 @csrf_exempt
-def get_encuesta_qol(request, user_id):
+def get_encuesta_qol(request, user):
     if (request.method == 'GET'):
         # Comprobar que el usuario está logged_in
-        if (UserModel.objects.filter(id=user_id, logged_in=True).exists()):
+        if (UserModel.objects.filter(username=user, logged_in=True).exists()):
             data = {'name': 'Get Encuesta QOL'}
             return JsonResponse(data)
+        
+        else:
+            return JsonResponse({'error': 'User not logged in'}, status=401)
 
 @csrf_exempt
 def upload_encuesta_pbac(request):
