@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-from api.models import CicleMenstrual, DiaMenstrual
+from api.models import CicleMenstrual, DiaMenstrual, EncuestaQOL
 
 def calcular_punts_test(user):
     punts = 0;
@@ -24,3 +24,17 @@ def calcular_punts_test(user):
             dia.tampo_mitja_tacat*5 +
             dia.tampo_molt_tacat*10
         )
+
+def calcular_punts_qol(user):
+    punts = 0;
+
+    qol = EncuestaQOL.objects.filter(usuari=user).last()
+
+    return (
+        qol.mes_7_dies*3 +
+        qol.mes_3_dies_abunda*1 +
+        qol.regla_molesta*3 +
+        qol.mancha_ropa*1 +
+        qol.manchar_asiento*1 +
+        qol.evitar_activitats*1
+    )

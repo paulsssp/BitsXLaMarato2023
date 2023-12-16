@@ -7,7 +7,7 @@ class CicleMenstrual(models.Model):
     data_camp = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return self.title
+        return self.usuari + " - " + self.data_camp
 
 class DiaMenstrual(models.Model):
     cicle = models.ForeignKey(CicleMenstrual, on_delete=models.CASCADE)
@@ -26,4 +26,17 @@ class DiaMenstrual(models.Model):
     tampo_coaguls = models.IntegerField()
 
     def __str__(self):
-        return self.title
+        return self.cicle.usuari + " - " + self.cicle.data_camp + " - " + self.dia
+
+class EncuestaQOL(models.Model):
+    mes_7_dies = models.BooleanField()
+    mes_3_dies_abunda = models.BooleanField()
+    regla_molesta = models.BooleanField()
+    mancha_ropa = models.BooleanField()
+    manchar_asiento = models.BooleanField()
+    evitar_activitats = models.BooleanField()
+
+    usuari = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.usuari
