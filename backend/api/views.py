@@ -1,10 +1,12 @@
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import get_object_or_404, render
-from django.core.serializers import serialize
+from django.shortcuts import render
 import json
-
-from .models import CicleMenstrual, DiaMenstrual, UserModel, EncuestaQOL
+from . import utils
+import io
+import seaborn as sns 
+import matplotlib.pyplot as plt
+from .models import CicleMenstrual, UserModel
 
 @csrf_exempt
 def logout(request):
@@ -31,24 +33,11 @@ def get_encuesta_pbac(request, user):
     if (request.method == 'GET'):
         # Comprobar que el usuario está logged_in
         if (UserModel.objects.filter(username=user, logged_in=True).exists()):
-            user_instance = get_object_or_404(UserModel, username=user, logged_in=True)
-            data = CicleMenstrual.objects.filter(usuari=user_instance)
-
-            # Return all the DiaMenstual objects grouped by CicleMenstrual
-            serialized_data = serialize('json', data)
-
-            # Parse the serialized data
-            json_data = json.loads(serialized_data)
-
-            # Group the DiaMenstrual objects by the field you want (replace 'field_name' with the actual field name)
-            grouped_data = {}
-            for entry in json_data:
-                field_value = entry['fields']['field_name']
-                grouped_data.setdefault(field_value, []).append(entry['fields'])
-
-            return JsonResponse({'data': grouped_data}, safe=False)
+            data = {'name': 'Get Encuesta PBAC'}
+            return JsonResponse(data)
         
         else:
+            print("no")
             return JsonResponse({'error': 'User not logged in'}, status=401)
 
 @csrf_exempt
@@ -56,68 +45,26 @@ def get_encuesta_qol(request, user):
     if (request.method == 'GET'):
         # Comprobar que el usuario está logged_in
         if (UserModel.objects.filter(username=user, logged_in=True).exists()):
-            user_instance = get_object_or_404(UserModel, username=user, logged_in=True)
-            data = EncuestaQOL.objects.filter(usuari=user_instance)
-
-            serialized_data = serialize('json', data)
-
-            json_data = [entry['fields'] for entry in json.loads(serialized_data)]
-            
-            return JsonResponse(json_data, safe=False)
+            data = {'name': 'Get Encuesta QOL'}
+            return JsonResponse(data)
         
         else:
             return JsonResponse({'error': 'User not logged in'}, status=401)
 
 @csrf_exempt
 def upload_encuesta_pbac(request):
-    if request.method == 'POST':
-        username = request.POST.get('usuari')
-
-        # Check if the user is logged in
-        user_instance = get_object_or_404(UserModel, username=username, logged_in=True)
-
-        if UserModel.objects.filter(username=username, logged_in=True).exists():
-            if request.POST.get('dia') == '1':
-                # Create a new CicleMenstrual object
-                obj_cicle = CicleMenstrual(usuari=user_instance)
-                obj_cicle.save()
-            else:
-                # Get the last CicleMenstrual object for the user
-                obj_cicle = CicleMenstrual.objects.filter(usuari=user_instance).last()
-            
-            # Create a new DiaMenstrual object
-            obj = DiaMenstrual(cicle=obj_cicle, dia=request.POST.get('dia'), compresa_poc_tacada=request.POST.get('compresa_poc_tacada'), compresa_mitja_tacada=request.POST.get('compresa_mitja_tacada'), compresa_molt_tacada=request.POST.get('compresa_molt_tacada'), compresa_coaguls=request.POST.get('compresa_coaguls'), tampo_poc_tacat=request.POST.get('tampo_poc_tacat'), tampo_mitja_tacat=request.POST.get('tampo_mitja_tacat'), tampo_molt_tacat=request.POST.get('tampo_molt_tacat'), tampo_coaguls=request.POST.get('tampo_coaguls'))
-            obj.save()
-            
-            return JsonResponse({'status': 'OK', 'message': 'Encuesta QOL uploaded'})
-        else:
-            return JsonResponse({'error': 'User not logged in'}, status=401)
+    if (request.method == 'POST'):
+        data = {'name': 'Upload Encuesta PBAC', 'echo': request.POST.get('echo')}
+        return JsonResponse(data)
+    
     else:
         return JsonResponse({'error': 'POST method required'}, status=405)
-
-
 
 @csrf_exempt
 def upload_encuesta_qol(request):
     if (request.method == 'POST'):
-        # Check if the user is logged in
-        if (UserModel.objects.filter(username=request.POST.get('usuari'), logged_in=True).exists()):
-            mes_7_dies = request.POST.get('mes_7_dies')
-            mes_3_dies_abunda = request.POST.get('mes_3_dies_abunda')
-            regla_molesta = request.POST.get('regla_molesta')
-            mancha_ropa = request.POST.get('mancha_ropa')
-            manchar_asiento = request.POST.get('manchar_asiento')
-            evitar_activitats = request.POST.get('evitar_activitats')
-            usuari_instance = get_object_or_404(UserModel, username=request.POST.get('usuari'), logged_in=True)
-            usuari = usuari_instance
-
-            obj = EncuestaQOL(mes_7_dies=mes_7_dies, mes_3_dies_abunda=mes_3_dies_abunda, regla_molesta=regla_molesta, mancha_ropa=mancha_ropa, manchar_asiento=manchar_asiento, evitar_activitats=evitar_activitats, usuari=usuari)
-            obj.save()
-
-            return JsonResponse({'status': 'OK', 'message': 'Encuesta QOL uploaded'})
-        
-        else:
-            return JsonResponse({'error': 'User not logged in'}, status=401)
+        data = {'name': 'Upload Encuesta QOL'}
+        return JsonResponse(data)
     
     else:
         return JsonResponse({'error': 'POST method required'}, status=405)
@@ -170,3 +117,38 @@ def register(request):
     
     else:
         return JsonResponse({'error': 'POST method required'}, status=405)
+
+@csrf_exempt
+def test(request):
+    print(utils.generar_grafic("paulita"))
+    return JsonResponse({'status': 'OK', 'message': 'Test'})
+
+@csrf_exempt
+def grafic_pbac(request, user):
+    usuari_instance = UserModel.objects.get(username=user)
+    cicles = CicleMenstrual.objects.filter(usuari=usuari_instance)
+
+    grafic_x = [x for x in range(1, len(cicles)+1)]
+    grafic_y = []
+
+    for cicle in cicles:
+        grafic_y.append(utils.calcular_punts_test(user, cicle))
+
+    sns.lineplot(x=grafic_x, y=grafic_y, label='Punts al test PBAC')
+
+    plt.axhline(y=300, color='red', linestyle='--', label='Horizontal Line at y=300')
+    plt.ylabel('Punts al test PBAC')
+    plt.gca().axes.get_xaxis().set_visible(False)
+
+    plt.savefig("grafic.png")
+
+    image_buffer = io.BytesIO()
+    plt.savefig(image_buffer, format='png')
+    plt.close()
+
+    # Move the buffer cursor to the beginning to read all the data
+    image_buffer.seek(0)
+
+    # Return the image as HttpResponse
+    return HttpResponse(image_buffer.read(), content_type='image/png')
+    
