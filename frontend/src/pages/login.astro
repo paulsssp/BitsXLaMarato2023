@@ -1,75 +1,99 @@
 ---
 import Footer from "../components/Footer.astro";
-import './styles/login.css';
+import "./styles/login.css";
 ---
 
 <html lang="ca">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} >
-    <title>Dracula Login</title>
-  </head>
-  <body>
-    <h1>Inicia sessió</h1>
-    <h2>Inici de sessió</h2>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <title>Dracula Login</title>
+    </head>
+    <body>
+        <h1>Inicia sessió</h1>
+        <h2>Inici de sessió</h2>
 
-    <p>Introdueix el teu nom d'usuari i contrasenya</p>
-    <form id="loginForm" action="http://127.0.0.1:8000/api/login/" method="post">
-        <label for="username">Usuari:</label>
-        <input type="text" id="username" name="username">
-        <br>
-        <label for="password">Contrasenya:</label>
-        <input type="password" id="password" name="password">
-        <br>
-        <button type="button" id="miBoton">Finalitzar</button>
-    </form>
+        <p>Introdueix el teu nom d'usuari i contrasenya</p>
+        <form
+            id="loginForm"
+            action="http://127.0.0.1:8000/api/login/"
+            method="post"
+        >
+            <label for="username">Usuari:</label>
+            <input type="text" id="username" name="username" />
+            <br />
+            <label for="password">Contrasenya:</label>
+            <input type="password" id="password" name="password" />
+            <br />
+            <button type="button" id="miBoton">Finalitzar</button>
+        </form>
 
-    <script type="module">
-      const miBoton = document.getElementById('miBoton');
+        <script type="module">
+            function getCookie(cname) {
+                let name = cname + "=";
+                let decodedCookie = decodeURIComponent(document.cookie);
+                let ca = decodedCookie.split(";");
+                for (let i = 0; i < ca.length; i++) {
+                    let c = ca[i];
+                    while (c.charAt(0) == " ") {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
 
-      function handleClick() {
-    console.log(JSON.stringify({
-        username: document.getElementById('username').value,
-        password: document.getElementById('password').value
-    }));
+            function setCookie(cname, cvalue) {
+                document.cookie = cname + "=" + cvalue + ";path=/";
+            }
+            const miBoton = document.getElementById("miBoton");
 
-    fetch('http://127.0.0.1:8000/api/login/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            username: document.getElementById('username').value,
-            password: document.getElementById('password').value
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
+            function handleClick() {
+                console.log(
+                    JSON.stringify({
+                        username: document.getElementById("username").value,
+                        password: document.getElementById("password").value,
+                    }),
+                );
 
-        // Check if the response is OK (200)
-        if (data.status == "OK") {
-            // TODO: Store the token in the local storage
-        } else {
-            alert('Error al iniciar sessió');
-        }
-    })
-    .catch(error => {
-        // Handle any errors that occurred during the fetch
-        console.error('Error during fetch:', error);
-        alert('Error al comunicar-se amb el servidor');
-    });
-}
+                fetch("http://192.168.45.49:8000/api/login/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        username: document.getElementById("username").value,
+                        password: document.getElementById("password").value,
+                    }),
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log(data);
 
+                        // Check if the response is OK (200)
+                        if (data.status == "OK") {
+                            setCookie("username", document.getElementById("username").value);
+                            alert("correcto")
+                        } else {
+                            alert("Error al iniciar sessió");
+                        }
+                    })
+                    .catch((error) => {
+                        // Handle any errors that occurred during the fetch
+                        console.error("Error during fetch:", error);
+                        alert("Error al comunicar-se amb el servidor");
+                    });
+            }
 
+            miBoton.addEventListener("click", handleClick);
+        </script>
 
-      miBoton.addEventListener('click', handleClick);
-    </script>
+        <p>Si no tens compte <a href="/signup">registra't</a></p>
 
-    <p>Si no tens compte <a href="/signup">registra't</a></p>
-
-    <Footer/>
-  </body>
+        <Footer />
+    </body>
 </html>
