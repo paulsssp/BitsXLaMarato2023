@@ -34,12 +34,7 @@ class DiaMenstrual(models.Model):
         return self.cicle.usuari + " - " + self.cicle.data_camp.day + "/" + self.cicle.data_camp.month +  "/" + self.cicle.data_camp.year + " - " + self.dia
 
 class EncuestaQOL(models.Model):
-    mes_7_dies = models.BooleanField()
-    mes_3_dies_abunda = models.BooleanField()
-    regla_molesta = models.BooleanField()
-    mancha_ropa = models.BooleanField()
-    manchar_asiento = models.BooleanField()
-    evitar_activitats = models.BooleanField()
+    punts = models.IntegerField()
 
     usuari = models.ForeignKey(UserModel, on_delete=models.CASCADE)
 

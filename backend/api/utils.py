@@ -28,18 +28,9 @@ def calcular_punts_test(user, cicle):
         
 
 def calcular_punts_qol(user):
-    punts = 0;
-
     qol = EncuestaQOL.objects.filter(usuari=user).last()
+    return qol.punts
 
-    return (
-        qol.mes_7_dies*3 +
-        qol.mes_3_dies_abunda*1 +
-        qol.regla_molesta*3 +
-        qol.mancha_ropa*1 +
-        qol.manchar_asiento*1 +
-        qol.evitar_activitats*1
-    )
 
 def veredicte_qol(user):
     punts = calcular_punts_qol(user)
