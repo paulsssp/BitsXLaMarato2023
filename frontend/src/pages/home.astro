@@ -15,10 +15,7 @@ import "../styles/home.css";
     <div
         class="relative overflow-hidden w-2/4 max-w-md shadow-xl flex items-center justify-center mx-auto mt-10 rounded-xl ring ring-electric-violet-200"
     >
-        <img
-            id="profileImage"
-            alt="Line Chart"
-        />
+        <img id="profileImage" alt="Line Chart" />
         <script>
             function getCookie(cname) {
                 let name = cname + "=";
@@ -52,14 +49,40 @@ import "../styles/home.css";
 
             if (username == "") {
                 setCookie("username", "paulita");
-                username = getCookie("username")
+                username = getCookie("username");
             }
 
             // Update the image source with the new URL
-            profileImage.setAttribute("src", `http://192.168.45.49:8000/api/grafic_pbac/${username}`);
+            profileImage.setAttribute(
+                "src",
+                `http://192.168.45.49:8000/api/grafic_pbac/${username}`,
+            );
+
+            // Checking last Samanta test
+            fetch(`http://192.168.45.49:8000/api/get_encuesta_qol/${username}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                // Add any additional headers if needed
+            },
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then((data) => {
+                // Handle the data from the successful response
+                console.log(data);
+            })
+            .catch((error) => {
+                // Handle errors during the fetch
+                console.error("Error during fetch:", error);
+            });
+
         </script>
     </div>
     <BonEstat />
     <IconsInferior />
 </MainLayout>
-
