@@ -116,16 +116,11 @@ def upload_encuesta_pbac(request):
 def upload_encuesta_qol(request):
         if (request.method == 'POST'):
             if (UserModel.objects.filter(username=request.POST.get('usuari'), logged_in=True).exists()):
-                mes_7_dies = request.POST.get('mes_7_dies')
-                mes_3_dies_abunda = request.POST.get('mes_3_dies_abunda')
-                regla_molesta = request.POST.get('regla_molesta')
-                mancha_ropa = request.POST.get('mancha_ropa')
-                manchar_asiento = request.POST.get('manchar_asiento')
-                evitar_activitats = request.POST.get('evitar_activitats')
+                punts = request.POST.get('punts')
                 usuari_instance = get_object_or_404(UserModel, username=request.POST.get('usuari'), logged_in=True)
                 usuari = usuari_instance
 
-                obj = EncuestaQOL(mes_7_dies=mes_7_dies, mes_3_dies_abunda=mes_3_dies_abunda, regla_molesta=regla_molesta, mancha_ropa=mancha_ropa, manchar_asiento=manchar_asiento, evitar_activitats=evitar_activitats, usuari=usuari)
+                obj = EncuestaQOL(punts=punts, usuari=usuari)
                 obj.save()
 
                 return JsonResponse({'status': 'OK', 'message': 'Encuesta QOL uploaded'})
