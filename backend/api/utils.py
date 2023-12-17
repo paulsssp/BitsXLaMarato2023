@@ -28,19 +28,35 @@ def calcular_punts_test(user, cicle):
         
 
 def calcular_punts_qol(user):
-    punts = 0;
-
     qol = EncuestaQOL.objects.filter(usuari=user).last()
+    return qol.punts
 
-    return (
-        qol.mes_7_dies*3 +
-        qol.mes_3_dies_abunda*1 +
-        qol.regla_molesta*3 +
-        qol.mancha_ropa*1 +
-        qol.manchar_asiento*1 +
-        qol.evitar_activitats*1
-    )
 
+def veredicte_qol(user):
+    punts = calcular_punts_qol(user)
+
+    if punts > 3:
+        return 2
+    
+    elif punts == 3:
+        return 1
+
+    elif punts < 3:
+        return 0
+
+def veredicte_pbac(user):
+    punts = calcular_punts_test(user)
+
+    if punts > 100:
+        return 2
+    
+    elif punts < 100 and punts > 85:
+        return 1
+
+    elif punts < 85:
+        return 0
+
+      
 def generar_grafic(user):
     usuari_instance = UserModel.objects.get(username=user)
     cicles = CicleMenstrual.objects.filter(usuari=usuari_instance)
@@ -58,3 +74,4 @@ def generar_grafic(user):
     plt.gca().axes.get_xaxis().set_visible(False)
 
     plt.savefig("grafic.png")
+
