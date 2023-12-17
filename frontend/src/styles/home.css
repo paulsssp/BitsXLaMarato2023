@@ -1,0 +1,66 @@
+html {
+    background-color: ghostwhite;
+}
+
+h1 {
+    font-size: 4rem;
+    font-family:'Comic-sans';
+    text-align: center;
+    padding: 10px 0;
+}
+
+h2 {
+    font-size: 3rem;
+    text-align: center;
+    padding: 10px 0;
+}
+
+h3 {
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 10px 0;
+}
+
+p {
+    font-family: 'font-mono';
+}
+
+.gradient-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    margin-left: 10px;
+    border-radius: 5px;
+    background: linear-gradient(to right, #e26dff, #a914d2); /* Cambia los colores según tus preferencias */
+    color: #fff; /* Color del texto */
+    border: none;
+}
+
+/* Cambia el estilo al pasar el ratón sobre el botón */
+.gradient-button:hover {
+    background: linear-gradient(to right, #d036ff, #9a0ebd); /* Cambia los colores al pasar el ratón */
+}
+
+.profile-container {
+    position: relative;
+    width: 100px; /* Ancho del contenedor */
+    height: 100px; /* Altura del contenedor */
+    border-radius: 50%; /* Hace que el contenedor sea circular */
+    overflow: hidden; /* Oculta el contenido fuera del contenedor circular */
+}
+
+.profile-image {
+    width: 100%; /* Hace que la imagen ocupe el 100% del contenedor */
+    height: 100%; /* Hace que la imagen ocupe el 100% del contenedor */
+    object-fit: cover; /* Ajusta la imagen para cubrir completamente el contenedor */
+}
+
+/* Estilos adicionales para posicionar en la esquina superior derecha */
+.position-top-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
