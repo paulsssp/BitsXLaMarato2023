@@ -31,7 +31,6 @@ import './styles/login.css';
       const miBoton = document.getElementById('miBoton');
 
       function handleClick() {
-        alert('clicat');
         fetch('/api/login', {
           method: 'POST',
           body: JSON.stringify({
@@ -46,12 +45,6 @@ import './styles/login.css';
       miBoton.addEventListener('click', handleClick);
     </script>
 
-
-    {/* 
-    {return_status == "ERROR"} && <script>
-      alert("hola");
-      </script>
-    */}
 
     <Footer/>
   </body>

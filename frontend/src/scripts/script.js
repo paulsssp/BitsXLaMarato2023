@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     alert("Error al comunicar-se amb el servidor");
                 });
             // Puedes redirigir o realizar otras acciones según sea necesario
-            // window.location.href = '/questionaris/';
+            window.location.href = '/questionaris/';
             return; // Evitar ejecutar el resto del código si ya hemos redirigido
         }
 

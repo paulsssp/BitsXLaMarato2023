@@ -47,7 +47,6 @@ import Header from '../components/Header.astro';
             }
 
       function handleClick() {
-        alert('Botón pulsado');
     console.log(JSON.stringify({
         username: document.getElementById('username').value,
         password: document.getElementById('password').value
@@ -82,7 +81,6 @@ import Header from '../components/Header.astro';
                         // Check if the response is OK (200)
                         if (data.status == "OK") {
                             setCookie("username", document.getElementById("username").value);
-                            alert("correcto")
                         } else {
                             alert("Error al iniciar sessió");
                         }
@@ -93,6 +91,7 @@ import Header from '../components/Header.astro';
                         alert("Error al comunicar-se amb el servidor");
                     });
             }
+        }
 
       miBoton.addEventListener('click', handleClick);
     }
