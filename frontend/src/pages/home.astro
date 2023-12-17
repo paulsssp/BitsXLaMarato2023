@@ -16,7 +16,7 @@ import "../styles/home.css";
         class="relative overflow-hidden w-2/4 max-w-md shadow-xl flex items-center justify-center mx-auto mt-10 rounded-xl ring ring-electric-violet-200"
     >
         <img
-            src="http://192.168.45.49:8000/api/grafic_pbac/paulita"
+            id="profileImage"
             alt="Line Chart"
         />
         <BonEstat />
@@ -41,7 +41,17 @@ import "../styles/home.css";
             function setCookie(cname, cvalue) {
                 document.cookie = cname + "=" + cvalue + ";path=/";
             }
+
+            // Get the image element by its ID
+            let profileImage = document.getElementById("profileImage");
+
+            // Get the username from the cookie
+            let username = getCookie("username");
+
+            // Update the image source with the new URL
+            profileImage.setAttribute("src", `http://192.168.45.49:8000/api/grafic_pbac/${username}`);
         </script>
     </div>
     <IconsInferior />
 </MainLayout>
+
