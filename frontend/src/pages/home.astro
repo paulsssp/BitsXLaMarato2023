@@ -2,17 +2,41 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import UserHome from "../components/UserHome.astro";
 import Boton from "../components/Boton.astro";
-import IconsInferior from "../components/IconsInferior.astro"
+import IconsInferior from "../components/IconsInferior.astro";
 import Header from "../components/Header.astro";
-import '../styles/home.css';
+import "../styles/home.css";
 ---
 
 <MainLayout pageTitle="Dracula - Home">
-    <Header title="Home"/>
-    <div class="relative overflow-hidden w-2/4 max-w-md shadow-xl flex items-center justify-center mx-auto mt-10 rounded-xl ring ring-electric-violet-200">
-        <img src="http://192.168.45.49:8000/api/grafic_pbac/paulita" alt="Line Chart">
-    </div>
-    <IconsInferior/>
-</MainLayout>
-  
+    <Header title="Home" />
+    <div
+        class="relative overflow-hidden w-2/4 max-w-md shadow-xl flex items-center justify-center mx-auto mt-10 rounded-xl ring ring-electric-violet-200"
+    >
+        <img
+            src="http://192.168.45.49:8000/api/grafic_pbac/paulita"
+            alt="Line Chart"
+        />
+        <script>
+            function getCookie(cname) {
+                let name = cname + "=";
+                let decodedCookie = decodeURIComponent(document.cookie);
+                let ca = decodedCookie.split(";");
+                for (let i = 0; i < ca.length; i++) {
+                    let c = ca[i];
+                    while (c.charAt(0) == " ") {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
 
+            function setCookie(cname, cvalue) {
+                document.cookie = cname + "=" + cvalue + ";path=/";
+            }
+        </script>
+    </div>
+    <IconsInferior />
+</MainLayout>
