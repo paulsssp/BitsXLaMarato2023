@@ -5,6 +5,9 @@ import Boton from "../components/Boton.astro";
 import IconsInferior from "../components/IconsInferior.astro";
 import Header from "../components/Header.astro";
 import "../styles/home.css";
+import BonEstat from "../components/BonEstat.astro";
+import MalEstat from "../components/MalEstat.astro";
+import "../styles/home.css";
 ---
 
 <MainLayout pageTitle="Dracula - Home">
@@ -16,6 +19,8 @@ import "../styles/home.css";
             src="http://192.168.45.49:8000/api/grafic_pbac/paulita"
             alt="Line Chart"
         />
+        <BonEstat />
+        <IconsInferior />
         <script>
             function getCookie(cname) {
                 let name = cname + "=";
