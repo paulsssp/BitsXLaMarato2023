@@ -41,6 +41,31 @@ def calcular_punts_qol(user):
         qol.evitar_activitats*1
     )
 
+def veredicte_qol(user):
+    punts = calcular_punts_qol(user)
+
+    if punts > 3:
+        return 2
+    
+    elif punts == 3:
+        return 1
+
+    elif punts < 3:
+        return 0
+
+def veredicte_pbac(user):
+    punts = calcular_punts_test(user)
+
+    if punts > 100:
+        return 2
+    
+    elif punts < 100 and punts > 85:
+        return 1
+
+    elif punts < 85:
+        return 0
+
+      
 def generar_grafic(user):
     usuari_instance = UserModel.objects.get(username=user)
     cicles = CicleMenstrual.objects.filter(usuari=usuari_instance)
@@ -58,3 +83,4 @@ def generar_grafic(user):
     plt.gca().axes.get_xaxis().set_visible(False)
 
     plt.savefig("grafic.png")
+
