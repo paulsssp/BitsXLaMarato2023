@@ -102,8 +102,7 @@ def upload_encuesta_pbac(request):
                 usuari=user_instance).last()
 
         # Create a new DiaMenstrual object
-        obj = DiaMenstrual(cicle=obj_cicle, dia=request.POST.get('dia'), compresa_poc_tacada=request.POST.get('compresa_poc_tacada'), compresa_mitja_tacada=request.POST.get('compresa_mitja_tacada'), compresa_molt_tacada=request.POST.get('compresa_molt_tacada'), compresa_coaguls=request.POST.get(
-            'compresa_coaguls'), tampo_poc_tacat=request.POST.get('tampo_poc_tacat'), tampo_mitja_tacat=request.POST.get('tampo_mitja_tacat'), tampo_molt_tacat=request.POST.get('tampo_molt_tacat'), tampo_coaguls=request.POST.get('tampo_coaguls'))
+        obj = DiaMenstrual(cicle=obj_cicle, dia=request.POST.get('dia'), punts=request.POST.get('punts'));
         obj.save()
 
         return JsonResponse({'status': 'OK', 'message': 'Encuesta QOL uploaded'})
