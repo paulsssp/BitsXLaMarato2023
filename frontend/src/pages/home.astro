@@ -19,8 +19,6 @@ import "../styles/home.css";
             id="profileImage"
             alt="Line Chart"
         />
-        <BonEstat />
-        <IconsInferior />
         <script>
             function getCookie(cname) {
                 let name = cname + "=";
@@ -42,16 +40,26 @@ import "../styles/home.css";
                 document.cookie = cname + "=" + cvalue + ";path=/";
             }
 
+            alert(getCookie("username"));
+
             // Get the image element by its ID
             let profileImage = document.getElementById("profileImage");
 
             // Get the username from the cookie
             let username = getCookie("username");
 
+            // Check it the cookie doesn't exist and if it doesn't set it to username: paulita
+
+            if (username == "") {
+                setCookie("username", "paulita");
+                username = getCookie("username")
+            }
+
             // Update the image source with the new URL
             profileImage.setAttribute("src", `http://192.168.45.49:8000/api/grafic_pbac/${username}`);
         </script>
     </div>
+    <BonEstat />
     <IconsInferior />
 </MainLayout>
 
