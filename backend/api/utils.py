@@ -13,16 +13,7 @@ def calcular_punts_test(user, cicle):
     # Iterem per cada dia del cicle
 
     for dia in dies:
-        punts += (
-            dia.compresa_poc_tacada*1 +
-            dia.compresa_mitja_tacada*5 + 
-            dia.compresa_molt_tacada*20 +
-            dia.compresa_coaguls*1 +
-            dia.tampo_poc_tacat*1 +
-            dia.tampo_mitja_tacat*5 +
-            dia.tampo_molt_tacat*10 +
-            dia.tampo_coaguls*1
-        )
+        punts += dia.punts
     
     return punts
         
