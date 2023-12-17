@@ -1,6 +1,8 @@
 ---
 import Footer from "../components/Footer.astro";
 import './styles/login.css';
+import Header from '../components/Header.astro';
+
 ---
 
 <html lang="ca">
@@ -12,20 +14,21 @@ import './styles/login.css';
     <title>Dracula Login</title>
   </head>
   <body>
-    <h1>Registra't</h1>
+    <Header style="margin: auto; padding: auto;" title = "Registra't"/>
 
     <form id="loginForm" action="http://127.0.0.1:8000/api/signup/" method="post">
       <label for="username">Usuari:</label>
-      <input type="text" id="username" name="username">
+      <input class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"type="text" id="username" name="username">
       <br>
       <label for="email">Email:</label>
-      <input type="text" id="email" name="email">
+      <input class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800" type="text" id="email" name="email">
       <br>
-      <label for="password">Contrasenya:</label>
-      <input type="password" id="password" name="password">
+      <label class= "" for="password">Contrasenya:</label>
+      <input class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800" type="password" id="password" name="password">
       <br>
       <label for="password2">Confirmar contrasenya:</label>
-      <input type="password" id="password2" name="password2">
+      <input class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800" type="password" id="password2" name="password2">
+      
 
       {/* 
       {return_status == "ERROR"} && <script>

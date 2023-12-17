@@ -18,10 +18,8 @@ html {
 }
 
 body {
-    margin: 0 auto;
+    margin: 0;
     width: 100%;
-    max-width: 80ch;
-    padding: 1rem;
     line-height: 1.5;
     text-align: center; /* Centra el texto e elementos en línea */
     align-items: center; /* Centra elementos de bloque */
@@ -53,7 +51,17 @@ label {
     margin: 1rem 0;
 }
 
+Header {
+    margin: 0;
+    padding: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
 
+input {
+    margin: 0;
+
+}
 
 /* nav styles */
 
