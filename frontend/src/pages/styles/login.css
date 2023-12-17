@@ -1,14 +1,29 @@
+/*
+--electric-violet-50: #fdf3ff;
+--electric-violet-100: #f8e6ff;
+--electric-violet-200: #f3ccff;
+--electric-violet-300: #eba3ff;
+--electric-violet-400: #e26dff;
+--electric-violet-500: #d036ff;
+--electric-violet-600: #a914d2;
+--electric-violet-700: #9a0ebd;
+--electric-violet-800: #800e9a;
+--electric-violet-900: #6c117e;
+--electric-violet-950: #470055;
+*/
+
 html {
-    background-color: #fdf3ff;
+    background-color: #f8e6ff;
     font-family: sans-serif;
 }
 
 body {
-    margin: 0 auto;
+    margin: 0;
     width: 100%;
-    max-width: 80ch;
-    padding: 1rem;
     line-height: 1.5;
+    text-align: center; /* Centra el texto e elementos en línea */
+    align-items: center; /* Centra elementos de bloque */
+    min-height: 100vh; /* Asegura que el cuerpo ocupe al menos la altura de la ventana */
 }
 
 * {
@@ -18,8 +33,8 @@ body {
 h1 {
     margin: 1rem 0;
     font-size: 2.5rem;
-    color: purple;
-
+    color: #6c117e;
+    text-transform: uppercase;
 }
 
 h2 {
@@ -36,7 +51,17 @@ label {
     margin: 1rem 0;
 }
 
+Header {
+    margin: 0;
+    padding: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
 
+input {
+    margin: 0;
+
+}
 
 /* nav styles */
 
@@ -83,3 +108,4 @@ label {
     }
 
 }
+
