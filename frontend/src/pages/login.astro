@@ -27,9 +27,22 @@ import Header from '../components/Header.astro';
         <br>
         <button type="button" id="miBoton" class="px-20 mt-5 mb-5 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-800 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Finalitzar</button>
     </form>
-
-    <script type="module">
-      const miBoton = document.getElementById('miBoton');
+        <script type="module">
+            function getCookie(cname) {
+                let name = cname + "=";
+                let decodedCookie = decodeURIComponent(document.cookie);
+                let ca = decodedCookie.split(";");
+                for (let i = 0; i < ca.length; i++) {
+                    let c = ca[i];
+                    while (c.charAt(0) == " ") {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
 
       function handleClick() {
         alert('Botón pulsado');
@@ -37,35 +50,47 @@ import Header from '../components/Header.astro';
         username: document.getElementById('username').value,
         password: document.getElementById('password').value
     }));
+            function setCookie(cname, cvalue) {
+                document.cookie = cname + "=" + cvalue + ";path=/";
+            }
+            const miBoton = document.getElementById("miBoton");
 
-    fetch('http://127.0.0.1:8000/api/login/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            username: document.getElementById('username').value,
-            password: document.getElementById('password').value
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
+            function handleClick() {
+                console.log(
+                    JSON.stringify({
+                        username: document.getElementById("username").value,
+                        password: document.getElementById("password").value,
+                    }),
+                );
 
-        // Check if the response is OK (200)
-        if (data.status == "OK") {
-            // TODO: Store the token in the local storage
-        } else {
-            alert('Error al iniciar sessió');
-        }
-    })
-    .catch(error => {
-        // Handle any errors that occurred during the fetch
-        console.error('Error during fetch:', error);
-        alert('Error al comunicar-se amb el servidor');
-    });
-}
+                fetch("http://192.168.45.49:8000/api/login/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        username: document.getElementById("username").value,
+                        password: document.getElementById("password").value,
+                    }),
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log(data);
 
+                        // Check if the response is OK (200)
+                        if (data.status == "OK") {
+                            setCookie("username", document.getElementById("username").value);
+                            alert("correcto")
+                        } else {
+                            alert("Error al iniciar sessió");
+                        }
+                    })
+                    .catch((error) => {
+                        // Handle any errors that occurred during the fetch
+                        console.error("Error during fetch:", error);
+                        alert("Error al comunicar-se amb el servidor");
+                    });
+            }
 
       miBoton.addEventListener('click', handleClick);
     </script>

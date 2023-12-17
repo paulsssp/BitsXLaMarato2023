@@ -2,17 +2,87 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import UserHome from "../components/UserHome.astro";
 import Boton from "../components/Boton.astro";
-import IconsInferior from "../components/IconsInferior.astro"
+import IconsInferior from "../components/IconsInferior.astro";
 import Header from "../components/Header.astro";
-import '../styles/home.css';
+import "../styles/home.css";
+import BonEstat from "../components/BonEstat.astro";
+import MalEstat from "../components/MalEstat.astro";
+import "../styles/home.css";
 ---
 
 <MainLayout pageTitle="Dracula - Home">
-    <Header title="Home"/>
-    <div class="relative overflow-hidden w-2/4 max-w-md shadow-xl flex items-center justify-center mx-auto mt-10 rounded-xl ring ring-electric-violet-200">
-        <img src="https://cdn.icon-icons.com/icons2/2914/PNG/512/line_chart_dots_icon_183424.png" alt="Descripción de la imagen" class="w-full h-auto">
-    </div>
-    <IconsInferior/>
-</MainLayout>
-  
+    <Header title="Home" />
+    <div
+        class="relative overflow-hidden w-2/4 max-w-md shadow-xl flex items-center justify-center mx-auto mt-10 rounded-xl ring ring-electric-violet-200"
+    >
+        <img id="profileImage" alt="Line Chart" />
+        <script>
+            function getCookie(cname) {
+                let name = cname + "=";
+                let decodedCookie = decodeURIComponent(document.cookie);
+                let ca = decodedCookie.split(";");
+                for (let i = 0; i < ca.length; i++) {
+                    let c = ca[i];
+                    while (c.charAt(0) == " ") {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
 
+            function setCookie(cname, cvalue) {
+                document.cookie = cname + "=" + cvalue + ";path=/";
+            }
+
+            alert(getCookie("username"));
+
+            // Get the image element by its ID
+            let profileImage = document.getElementById("profileImage");
+
+            // Get the username from the cookie
+            let username = getCookie("username");
+
+            // Check it the cookie doesn't exist and if it doesn't set it to username: paulita
+
+            if (username == "") {
+                setCookie("username", "paulita");
+                username = getCookie("username");
+            }
+
+            // Update the image source with the new URL
+            profileImage.setAttribute(
+                "src",
+                `http://192.168.45.49:8000/api/grafic_pbac/${username}`,
+            );
+
+            // Checking last Samanta test
+            fetch(`http://192.168.45.49:8000/api/get_encuesta_qol/${username}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                // Add any additional headers if needed
+            },
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then((data) => {
+                // Handle the data from the successful response
+                console.log(data);
+            })
+            .catch((error) => {
+                // Handle errors during the fetch
+                console.error("Error during fetch:", error);
+            });
+
+        </script>
+    </div>
+    <BonEstat />
+    <IconsInferior />
+</MainLayout>

@@ -19,27 +19,13 @@ class DiaMenstrual(models.Model):
     dia = models.IntegerField()
 
     # Compreses
-    compresa_poc_tacada = models.IntegerField()
-    compresa_mitja_tacada = models.IntegerField()
-    compresa_molt_tacada = models.IntegerField()
-    compresa_coaguls = models.IntegerField()
-
-    # Tampons
-    tampo_poc_tacat = models.IntegerField()
-    tampo_mitja_tacat = models.IntegerField()
-    tampo_molt_tacat = models.IntegerField()
-    tampo_coaguls = models.IntegerField()
+    punts = models.IntegerField()
 
     def __str__(self):
-        return self.cicle.usuari + " - " + self.cicle.data_camp + " - " + self.dia
+        return self.cicle.usuari + " - " + self.cicle.data_camp.day + "/" + self.cicle.data_camp.month +  "/" + self.cicle.data_camp.year + " - " + self.dia
 
 class EncuestaQOL(models.Model):
-    mes_7_dies = models.BooleanField()
-    mes_3_dies_abunda = models.BooleanField()
-    regla_molesta = models.BooleanField()
-    mancha_ropa = models.BooleanField()
-    manchar_asiento = models.BooleanField()
-    evitar_activitats = models.BooleanField()
+    punts = models.IntegerField()
 
     usuari = models.ForeignKey(UserModel, on_delete=models.CASCADE)
 
